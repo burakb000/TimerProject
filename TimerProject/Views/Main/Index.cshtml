@@ -1,0 +1,70 @@
+﻿@using TimerProject.Models.Entity
+@model List<TBLDATEDATAS>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutNavbar.cshtml";
+}
+
+<h2>Ana Sayfa</h2>
+
+<div style="background-color:brown;mask-size:50px;color:azure">
+    <table>
+        <tr>
+            <td>  <div style="font-size:42px">   Bugün Toplam Çalışma:  </div>  </td>
+            <td>  <div style="font-size: 42px;  margin-left: 20px">   @ViewBag.GunlukSure</div> </td>
+        </tr>
+    </table>
+</div>
+
+<div style="margin-bottom:20px; margin-top:20px">
+
+    @using (Html.BeginForm("NewData", "Main"))
+    {
+        @*<form asp-controller="Main" asp-action="NewData" method="post">
+            </form>*@
+        <table>
+            <tr>
+                <td>
+                    <label>Eklenecek Süreyi Giriniz</label>
+
+                    <input type="text" name="sminute" class="form-control" style="background-color:burlywood;color:black" placeholder=".. dk" />
+                </td>
+                <td>
+                    <br />
+                    <div style="margin-left:10px">
+                        <button type="submit" class="btn btn-success" style="width:100px">Ekle</button>
+
+                    </div>
+
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>TOPLAM DAKİKA</th>
+        <th>TARİH</th>
+        <th>TARİH VE SAAT</th>
+        <th>SİL</th>
+        <th>GÜNCELLE</th>
+    </tr>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.id</td>
+                <td>@p.summinute</td>
+                <td>@p.date.ToString().TrimEnd('0', ':')</td>
+                <td>@p.datetime</td>
+                <td><a href="/Main/DeleteData/@p.id" class="btn btn-danger">Sil</a></td>
+                <td><a href="/Main/UpdateData/@p.id" class="btn btn-primary">Güncelle</a></td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
